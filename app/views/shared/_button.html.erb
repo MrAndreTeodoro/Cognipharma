@@ -1,0 +1,52 @@
+<%# Button Component
+  Usage:
+  <%= render 'shared/button', text: 'Click me', href: '/path', variant: :primary, size: :default %>
+  
+  Variants: :primary, :outline, :white
+  Sizes: :default, :large
+  Type: :button, :submit, :link (default)
+%>
+
+<% 
+  variant = local_assigns.fetch(:variant, :primary)
+  size = local_assigns.fetch(:size, :default)
+  type = local_assigns.fetch(:type, :link)
+  
+  base_classes = "inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer no-underline"
+  
+  size_classes = {
+    default: "px-5 py-2",
+    large: "px-8 py-4 text-lg"
+  }[size]
+  
+  variant_classes = {
+    primary: "bg-primary text-white hover:bg-primary-dark",
+    outline: "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white",
+    white: "bg-white text-primary hover:bg-bg"
+  }[variant]
+  
+  classes = "#{base_classes} #{size_classes} #{variant_classes} #{local_assigns.fetch(:class, '')}"
+%>
+
+<% if type == :link %>
+  <%= link_to href, class: classes do %>
+    <% if local_assigns[:icon] %>
+      <%= icon %>
+    <% end %>
+    <%= text %>
+  <% end %>
+<% elsif type == :submit %>
+  <%= button_tag type: :submit, class: classes do %>
+    <% if local_assigns[:icon] %>
+      <%= icon %>
+    <% end %>
+    <%= text %>
+  <% end %>
+<% else %>
+  <%= button_tag class: classes do %>
+    <% if local_assigns[:icon] %>
+      <%= icon %>
+    <% end %>
+    <%= text %>
+  <% end %>
+<% end %>

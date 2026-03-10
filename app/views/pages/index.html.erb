@@ -1,0 +1,856 @@
+<% content_for :title, "CogniThera - Nova Opção Terapêutica | Cognipharma" %>
+
+<style>
+    /* Hide scrollbar for sticky nav */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    /* Offset anchor links for sticky header */
+    html {
+        scroll-padding-top: 80px;
+    }
+    section[id] {
+        scroll-margin-top: 80px;
+    }
+    /* Accordion styles */
+    .accordion-item.active .accordion-content {
+        max-height: 500px;
+    }
+    .accordion-item.active .accordion-icon {
+        transform: rotate(180deg);
+    }
+</style>
+
+<!-- Header -->
+    <header class="bg-white shadow-card fixed w-full top-0 z-50">
+        <nav class="flex justify-between items-center py-4 px-[5%] max-w-[1400px] mx-auto">
+            <div class="text-2xl font-bold text-primary">Cogni<span class="text-secondary">Pharma</span></div>
+            <ul class="hidden md:flex gap-8 list-none">
+                <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Home</a></li>
+                <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Áreas Terapêuticas</a></li>
+                <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Recursos</a></li>
+                <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Perfil</a></li>
+            </ul>
+            <div class="flex gap-4">
+                <button class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white" onclick="saveForLater()">
+                    <span>&#9734;</span> Guardar
+                </button>
+                <button class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-primary text-white hover:bg-primary-dark" onclick="shareContent()">
+                    <span>&#8624;</span> Partilhar
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-primary to-primary-dark text-white py-16 px-[5%] mt-[70px] overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-30" style="background: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;);"></div>
+        <div class="relative z-10 max-w-[1400px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="inline-block bg-accent text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">NOVO • Aprovado EMA 2024</span>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">CogniThera</h1>
+                <p class="text-xl opacity-90 mb-8">Inibidor de checkpoint imunológico de última geração para carcinoma de células renais avançado</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#dados" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-white text-primary hover:bg-bg">Consultar Dados Clínicos</a>
+                    <a href="/assessment" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-white/20 text-white border-2 border-white hover:bg-white hover:text-primary">Avaliação Personalizada</a>
+                    <a href="#educational" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary">Ver Conteúdos Educativos</a>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="bg-white/10 rounded-xl p-8 backdrop-blur-md">
+                    <div class="text-7xl text-center">&#127973;</div>
+                    <p class="text-center mt-4 opacity-90">Mecanismo de Ação Inovador</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Navigation -->
+    <nav class="bg-white shadow-card sticky top-[70px] z-40 px-[5%]">
+        <div class="max-w-[1400px] mx-auto flex gap-8 overflow-x-auto scrollbar-hide">
+            <a href="#overview" class="py-4 text-text font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap hover:text-primary hover:border-primary">Visão Geral</a>
+            <a href="#dados" class="py-4 text-text font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap hover:text-primary hover:border-primary">Dados Clínicos</a>
+            <a href="#educational" class="py-4 text-text font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap hover:text-primary hover:border-primary">Conteúdos Educativos</a>
+            <a href="#resources" class="py-4 text-text font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap hover:text-primary hover:border-primary">Recursos</a>
+            <a href="#faq" class="py-4 text-text font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap hover:text-primary hover:border-primary">FAQ</a>
+            <a href="/assessment" class="py-4 text-accent font-semibold no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap">Avaliação Personalizada &#8594;</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-[1400px] mx-auto py-12 px-[5%]">
+        <!-- Overview Section -->
+        <section id="overview" class="mb-16">
+            <h2 class="text-3xl text-primary mb-6 pb-2 border-b-[3px] border-secondary inline-block font-bold">Visão Geral</h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-card border-l-4 border-secondary">
+                    <div class="text-3xl mb-2">&#127973;</div>
+                    <h3 class="text-primary mb-2 font-semibold text-lg">Indicação</h3>
+                    <p class="text-text-light text-sm">Carcinoma de células renais (CCR) avançado em adultos, como monoterapia de primeira linha</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-card border-l-4 border-secondary">
+                    <div class="text-3xl mb-2">&#128170;</div>
+                    <h3 class="text-primary mb-2 font-semibold text-lg">Mecanismo de Ação</h3>
+                    <p class="text-text-light text-sm">Inibidor selectivo do PD-1 que potencia a resposta imunitária antitumoral</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-card border-l-4 border-secondary">
+                    <div class="text-3xl mb-2">&#128137;</div>
+                    <h3 class="text-primary mb-2 font-semibold text-lg">Administração</h3>
+                    <p class="text-text-light text-sm">Infusão IV a cada 3 semanas durante 30 minutos, ambulatório</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-card border-l-4 border-secondary">
+                    <div class="text-3xl mb-2">&#128567;</div>
+                    <h3 class="text-primary mb-2 font-semibold text-lg">Perfil de Segurança</h3>
+                    <p class="text-text-light text-sm">Perfil favorável vs. terapia padrão. Monitorização de eventos imunomediados</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-card mb-8">
+                <h3 class="text-primary mb-4 font-semibold text-lg">Resumo Terapêutico</h3>
+                <p class="mb-4">
+                    O CogniThera representa um avanço significativo no tratamento do carcinoma de células renais avançado.
+                    Como inibidor de checkpoint imunológico de nova geração, demonstra eficácia superior no ensaio
+                    clínico de Fase III THERA-001, com benefício de sobrevivência global clinicamente significativo.
+                </p>
+                <p>
+                    A sua selectividade aprimorada pelo receptor PD-1 minimiza os efeitos adversos imunomediados
+                    frequentemente observados com terapias convencionais, permitindo uma melhor qualidade de vida
+                    para os doentes durante o tratamento.
+                </p>
+
+                <div class="bg-gradient-to-br from-[#e8f4f8] to-[#d1e7dd] border-l-4 border-success p-6 rounded-lg mt-8">
+                    <h4 class="text-success mb-2 font-semibold">&#9733; Pontos-Chave para a Prática Clínica</h4>
+                    <ul class="ml-6 mt-2 list-disc">
+                        <li>Administração conveniente em regime ambulatório</li>
+                        <li>Sem necessidade de pré-medicação rotineira</li>
+                        <li>Intervalo de 3 semanas permite melhor conciliação com vida quotidiana do doente</li>
+                        <li>Redução de 40% no risco de progressão vs. sunitinibe (HR 0.60; IC 95%: 0.48-0.75)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clinical Data Section -->
+        <section id="dados" class="mb-16">
+            <h2 class="text-3xl text-primary mb-6 pb-2 border-b-[3px] border-secondary inline-block font-bold">Dados Clínicos</h2>
+
+            <div class="flex gap-2 mb-6 border-b-2 border-border overflow-x-auto">
+                <button class="tab-btn py-3 px-6 bg-none border-none font-medium text-text-light whitespace-nowrap border-b-[3px] border-transparent -mb-0.5 transition-all duration-300 hover:text-primary cursor-pointer active" data-tab="efficacy" onclick="switchTab('efficacy')">Eficácia</button>
+                <button class="tab-btn py-3 px-6 bg-none border-none font-medium text-text-light whitespace-nowrap border-b-[3px] border-transparent -mb-0.5 transition-all duration-300 hover:text-primary cursor-pointer" data-tab="safety" onclick="switchTab('safety')">Segurança</button>
+                <button class="tab-btn py-3 px-6 bg-none border-none font-medium text-text-light whitespace-nowrap border-b-[3px] border-transparent -mb-0.5 transition-all duration-300 hover:text-primary cursor-pointer" data-tab="comparison" onclick="switchTab('comparison')">Comparativos</button>
+            </div>
+
+            <div id="efficacy" class="tab-content block">
+                <div class="bg-white p-6 rounded-lg shadow-card mb-4 border-l-4 border-primary">
+                    <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+                        <div>
+                            <span class="text-primary font-semibold text-lg">Ensaio THERA-001</span>
+                            <p class="text-text-light text-sm mt-1">
+                                Estudo multicêntrico, randomizado, duplo-cego, controlado por placebo
+                            </p>
+                        </div>
+                        <span class="bg-secondary text-white px-3 py-1 rounded text-sm font-semibold">FASE III</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">892</div>
+                            <div class="text-sm text-text-light">Doentes randomizados</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">24.8m</div>
+                            <div class="text-sm text-text-light">Mediana SG</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">42%</div>
+                            <div class="text-sm text-text-light">Taxa resposta objetiva</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">9.2m</div>
+                            <div class="text-sm text-text-light">Mediana LPP</div>
+                        </div>
+                    </div>
+
+                    <p class="text-text-light mt-4">
+                        <strong>Conclusão:</strong> O CogniThera demonstrou superioridade estatística e clinicamente
+                        significativa em sobrevivência global vs. sunitinibe (HR 0.68; IC 95%: 0.52-0.89; p&lt;0.001).
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white mt-4">Ver Publicação Completa</a>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-card mb-4 border-l-4 border-primary">
+                    <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+                        <div>
+                            <span class="text-primary font-semibold text-lg">Ensaio THERA-002 (Extensão)</span>
+                            <p class="text-text-light text-sm mt-1">
+                                Análise de sobrevivência a longo prazo (3 anos)
+                            </p>
+                        </div>
+                        <span class="bg-secondary text-white px-3 py-1 rounded text-sm font-semibold">FASE III Extensão</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">65%</div>
+                            <div class="text-sm text-text-light">Sobrevivência 3 anos</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">28%</div>
+                            <div class="text-sm text-text-light">Respostas duradouras</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="safety" class="tab-content hidden">
+                <div class="bg-white p-6 rounded-lg shadow-card mb-4 border-l-4 border-primary">
+                    <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+                        <div>
+                            <span class="text-primary font-semibold text-lg">Perfil de Segurança Integrado</span>
+                            <p class="text-text-light text-sm mt-1">
+                                Análise pool de segurança (N=1247)
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">15%</div>
+                            <div class="text-sm text-text-light">Eventos Grau 3-4</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">3.2%</div>
+                            <div class="text-sm text-text-light">Descontinuação por AE</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary">8%</div>
+                            <div class="text-sm text-text-light">Eventos imunomediados</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-[#e8f4f8] to-[#d1e7dd] border-l-4 border-success p-4 rounded-lg mt-4">
+                        <h4 class="text-success font-semibold mb-2">Gestão de Eventos Adversos</h4>
+                        <p>A maioria dos eventos imunomediados foi de Grau 1-2 e reversível com corticosteroides.
+                        Protocolo de gestão recomendado disponível na secção de recursos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comparison" class="tab-content hidden">
+                <div class="w-full bg-white rounded-lg overflow-hidden shadow-card mt-6 overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="bg-primary text-white p-4 text-left font-semibold">Parâmetro</th>
+                                <th class="bg-primary text-white p-4 text-left font-semibold">CogniThera</th>
+                                <th class="bg-primary text-white p-4 text-left font-semibold">Sunitinibe</th>
+                                <th class="bg-primary text-white p-4 text-left font-semibold">Pembrolizumabe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-border hover:bg-bg">
+                                <td class="p-4">Sobrevivência Global (mediana)</td>
+                                <td class="p-4 font-semibold">24.8 meses</td>
+                                <td class="p-4">19.2 meses</td>
+                                <td class="p-4">22.1 meses</td>
+                            </tr>
+                            <tr class="border-b border-border hover:bg-bg">
+                                <td class="p-4">Livre de Progressão (mediana)</td>
+                                <td class="p-4 font-semibold">9.2 meses</td>
+                                <td class="p-4">5.6 meses</td>
+                                <td class="p-4">8.4 meses</td>
+                            </tr>
+                            <tr class="border-b border-border hover:bg-bg">
+                                <td class="p-4">Taxa Resposta Objetiva</td>
+                                <td class="p-4 font-semibold">42%</td>
+                                <td class="p-4">27%</td>
+                                <td class="p-4">35%</td>
+                            </tr>
+                            <tr class="border-b border-border hover:bg-bg">
+                                <td class="p-4">Eventos Grau 3-4</td>
+                                <td class="p-4 font-semibold">15%</td>
+                                <td class="p-4">68%</td>
+                                <td class="p-4">22%</td>
+                            </tr>
+                            <tr class="hover:bg-bg">
+                                <td class="p-4">Via Administração</td>
+                                <td class="p-4">IV q3semanas</td>
+                                <td class="p-4">Oral diário</td>
+                                <td class="p-4">IV q3semanas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="mt-8 p-6 bg-white rounded-lg shadow-card flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <h4 class="text-primary font-semibold mb-1">Resumo dos Dados Clínicos</h4>
+                    <p class="text-text-light text-sm">PDF completo com todas as análises e referências</p>
+                </div>
+                <button class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-primary text-white hover:bg-primary-dark" onclick="downloadPDF()">
+                    <span>&#11015;</span> Descarregar PDF
+                </button>
+            </div>
+        </section>
+
+        <!-- Educational Content -->
+        <section id="educational" class="mb-16">
+            <h2 class="text-3xl text-primary mb-6 pb-2 border-b-[3px] border-secondary inline-block font-bold">Conteúdos Educativos</h2>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary active" data-filter="all" onclick="filterResources('all')">Todos</button>
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary" data-filter="video" onclick="filterResources('video')">Vídeos</button>
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary" data-filter="webinar" onclick="filterResources('webinar')">Webinars</button>
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary" data-filter="infographic" onclick="filterResources('infographic')">Infografias</button>
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary" data-filter="audio" onclick="filterResources('audio')">Áudio</button>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="resourcesGrid">
+                <div class="resource-card cursor-pointer bg-white rounded-lg overflow-hidden shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-lg" data-type="video">
+                    <div class="h-40 bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-5xl text-white">&#9658;</div>
+                    <div class="p-6">
+                        <span class="inline-block bg-bg text-primary px-2 py-1 rounded text-xs font-semibold mb-2">VÍDEO</span>
+                        <h3 class="text-lg text-text font-semibold mb-2">Mecanismo de Ação do CogniThera</h3>
+                        <p class="text-text-light text-sm">
+                            Explicação visual da interação PD-1/PD-L1 e restauração da resposta imunitária.
+                        </p>
+                        <div class="flex gap-4 text-sm text-text-light mt-4">
+                            <span>&#9201; 8 min</span>
+                            <span class="inline-flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-success"></span>
+                                Básico
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-card cursor-pointer bg-white rounded-lg overflow-hidden shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-lg" data-type="webinar">
+                    <div class="h-40 bg-gradient-to-br from-secondary to-primary flex items-center justify-center text-5xl text-white">&#127909;</div>
+                    <div class="p-6">
+                        <span class="inline-block bg-bg text-primary px-2 py-1 rounded text-xs font-semibold mb-2">WEBINAR</span>
+                        <h3 class="text-lg text-text font-semibold mb-2">Casos Clínicos em Oncologia Médica</h3>
+                        <p class="text-text-light text-sm">
+                            Discussão de 3 casos práticos com Dr. Maria Santos e Dr. João Ferreira.
+                        </p>
+                        <div class="flex gap-4 text-sm text-text-light mt-4">
+                            <span>&#9201; 45 min</span>
+                            <span class="inline-flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-accent"></span>
+                                Intermédio
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-card cursor-pointer bg-white rounded-lg overflow-hidden shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-lg" data-type="infographic">
+                    <div class="h-40 bg-gradient-to-br from-accent to-[#e67e22] flex items-center justify-center text-5xl text-white">&#128200;</div>
+                    <div class="p-6">
+                        <span class="inline-block bg-bg text-primary px-2 py-1 rounded text-xs font-semibold mb-2">INFOGRAFIA</span>
+                        <h3 class="text-lg text-text font-semibold mb-2">Algoritmo de Tratamento CCR</h3>
+                        <p class="text-text-light text-sm">
+                            Fluxograma de decisão terapêutica e posicionamento do CogniThera.
+                        </p>
+                        <div class="flex gap-4 text-sm text-text-light mt-4">
+                            <span>&#11015; PDF</span>
+                            <span class="inline-flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-success"></span>
+                                Básico
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-card cursor-pointer bg-white rounded-lg overflow-hidden shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-lg" data-type="audio">
+                    <div class="h-40 bg-gradient-to-br from-[#9b59b6] to-[#8e44ad] flex items-center justify-center text-5xl text-white">&#127908;</div>
+                    <div class="p-6">
+                        <span class="inline-block bg-bg text-primary px-2 py-1 rounded text-xs font-semibold mb-2">PODCAST</span>
+                        <h3 class="text-lg text-text font-semibold mb-2">Oncologia em Discussão - Ep. 23</h3>
+                        <p class="text-text-light text-sm">
+                            Imunoterapia no CCR: evidências recentes e perspectivas futuras.
+                        </p>
+                        <div class="flex gap-4 text-sm text-text-light mt-4">
+                            <span>&#9201; 32 min</span>
+                            <span class="inline-flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-error"></span>
+                                Avançado
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-card cursor-pointer bg-white rounded-lg overflow-hidden shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-lg" data-type="video">
+                    <div class="h-40 bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-5xl text-white">&#9658;</div>
+                    <div class="p-6">
+                        <span class="inline-block bg-bg text-primary px-2 py-1 rounded text-xs font-semibold mb-2">VÍDEO</span>
+                        <h3 class="text-lg text-text font-semibold mb-2">Gestão de Eventos Imunomediados</h3>
+                        <p class="text-text-light text-sm">
+                            Protocolos práticos de identificação e tratamento de efeitos adversos.
+                        </p>
+                        <div class="flex gap-4 text-sm text-text-light mt-4">
+                            <span>&#9201; 12 min</span>
+                            <span class="inline-flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-accent"></span>
+                                Intermédio
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resource-card cursor-pointer bg-white rounded-lg overflow-hidden shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-lg" data-type="webinar">
+                    <div class="h-40 bg-gradient-to-br from-secondary to-primary flex items-center justify-center text-5xl text-white">&#127909;</div>
+                    <div class="p-6">
+                        <span class="inline-block bg-bg text-primary px-2 py-1 rounded text-xs font-semibold mb-2">WEBINAR</span>
+                        <h3 class="text-lg text-text font-semibold mb-2">Resultados THERA-001: Análise Detalhada</h3>
+                        <p class="text-text-light text-sm">
+                            Apresentação aprofundada do estudo pivotal com Dr. Ana Oliveira.
+                        </p>
+                        <div class="flex gap-4 text-sm text-text-light mt-4">
+                            <span>&#9201; 60 min</span>
+                            <span class="inline-flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-error"></span>
+                                Avançado
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Resources -->
+        <section id="resources" class="mb-16">
+            <h2 class="text-3xl text-primary mb-6 pb-2 border-b-[3px] border-secondary inline-block font-bold">Recursos Adicionais</h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-card">
+                    <h3 class="text-primary mb-4 flex items-center gap-2 font-semibold">&#128218; Artigos Científicos</h3>
+                    <ul class="list-none">
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>THERA-001: Primary Analysis</span>
+                                <span class="bg-accent text-white px-2 py-0.5 rounded text-xs">NOVO</span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Review: IO in RCC 2024</span>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Meta-análise Checkpoint Inhibitors</span>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Real-world Evidence Study</span>
+                                <span class="bg-accent text-white px-2 py-0.5 rounded text-xs">DESTAQUE</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-card">
+                    <h3 class="text-primary mb-4 flex items-center gap-2 font-semibold">&#128221; Casos Clínicos</h3>
+                    <ul class="list-none">
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Caso 1: CCR de risco intermédio</span>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Caso 2: Gestão de tireoidite</span>
+                                <span class="bg-accent text-white px-2 py-0.5 rounded text-xs">DESTAQUE</span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Caso 3: Resposta tardia</span>
+                                <span></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-card">
+                    <h3 class="text-primary mb-4 flex items-center gap-2 font-semibold">&#128203; Guidelines</h3>
+                    <ul class="list-none">
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>ESMO Guidelines RCC 2024</span>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>NCCN Kidney Cancer v2.2024</span>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Algorithm Treatment Flow</span>
+                                <span class="bg-accent text-white px-2 py-0.5 rounded text-xs">PDF</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-card">
+                    <h3 class="text-primary mb-4 flex items-center gap-2 font-semibold">&#128196; Fichas Técnicas</h3>
+                    <ul class="list-none">
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>RCP CogniThera (PT)</span>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Ficha Técnica</span>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li class="py-3 border-b border-border last:border-0">
+                            <a href="#" class="text-text no-underline flex justify-between items-center transition-colors duration-300 hover:text-primary">
+                                <span>Carta de Compensação</span>
+                                <span></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="mb-16">
+            <h2 class="text-3xl text-primary mb-6 pb-2 border-b-[3px] border-secondary inline-block font-semibold">Perguntas Frequentes</h2>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary active" onclick="filterFAQ('all')">Todas</button>
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary" onclick="filterFAQ('efficacy')">Eficácia</button>
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary" onclick="filterFAQ('safety')">Segurança</button>
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary" onclick="filterFAQ('administration')">Administração</button>
+                <button class="filter-btn py-2 px-4 bg-white border-2 border-border rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white hover:border-primary" onclick="filterFAQ('contraindications')">Contraindicações</button>
+            </div>
+
+            <div class="bg-white rounded-lg overflow-hidden shadow-card">
+                <div class="accordion-item border-b border-border" data-category="efficacy">
+                    <div class="accordion-header py-5 px-6 cursor-pointer flex justify-between items-center transition-colors duration-300 hover:bg-bg" onclick="toggleAccordion(this)">
+                        <h4 class="font-semibold text-text">Quais são os principais critérios de elegibilidade para tratamento com CogniThera?</h4>
+                        <span class="accordion-icon text-primary text-2xl transition-transform duration-300">&#9662;</span>
+                    </div>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-5 text-text-light">
+                            O CogniThera está indicado para adultos com carcinoma de células renais avançado de risco
+                            intermédio ou favorável (segundo critérios IMDC). Os doentes devem ter ECOG 0-1 e função
+                            orgânica adequada. Contraindicado em doentes com doença autoimune ativa não controlada
+                            ou terapia imunossupressora sistémica.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-b border-border" data-category="safety">
+                    <div class="accordion-header py-5 px-6 cursor-pointer flex justify-between items-center transition-colors duration-300 hover:bg-bg" onclick="toggleAccordion(this)">
+                        <h4 class="font-semibold text-text">Como gerir eventos imunomediados de Grau 2?</h4>
+                        <span class="accordion-icon text-primary text-2xl transition-transform duration-300">&#9662;</span>
+                    </div>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-5 text-text-light">
+                            Para eventos imunomediados de Grau 2, recomenda-se suspender temporariamente o CogniThera
+                            e iniciar corticosteroides orais (prednisolona 0.5-1 mg/kg/dia). Monitorização sintomática
+                            até resolução para Grau ≤1. Retorno ao tratamento possível após recuperação completa.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-b border-border" data-category="administration">
+                    <div class="accordion-header py-5 px-6 cursor-pointer flex justify-between items-center transition-colors duration-300 hover:bg-bg" onclick="toggleAccordion(this)">
+                        <h4 class="font-semibold text-text">Qual o intervalo recomendado entre infusões?</h4>
+                        <span class="accordion-icon text-primary text-2xl transition-transform duration-300">&#9662;</span>
+                    </div>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-5 text-text-light">
+                            O CogniThera é administrado por infusão intravenosa durante 30 minutos a cada 3 semanas.
+                            Se uma dose for adiada, deve administrar assim que possível. Não duplar a dose seguinte.
+                            Intervalo mínimo recomendado entre doses: 2 semanas.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-b border-border" data-category="contraindications">
+                    <div class="accordion-header py-5 px-6 cursor-pointer flex justify-between items-center transition-colors duration-300 hover:bg-bg" onclick="toggleAccordion(this)">
+                        <h4 class="font-semibold text-text">Pode ser usado em doentes com função hepática comprometida?</h4>
+                        <span class="accordion-icon text-primary text-2xl transition-transform duration-300">&#9662;</span>
+                    </div>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-5 text-text-light">
+                            Não é necessário ajuste de dose em doentes com insuficiência hepática ligeira (Child-Pugh A).
+                            Não foram estabelecidas recomendações para doentes com insuficiência hepática moderada a
+                            grave (Child-Pugh B ou C) devido à limitação de dados.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item" data-category="contraindications">
+                    <div class="accordion-header py-5 px-6 cursor-pointer flex justify-between items-center transition-colors duration-300 hover:bg-bg" onclick="toggleAccordion(this)">
+                        <h4 class="font-semibold text-text">Qual a interação com vacinas?</h4>
+                        <span class="accordion-icon text-primary text-2xl transition-transform duration-300">&#9662;</span>
+                    </div>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-5 text-text-light">
+                            As vacinas vivas/atenuadas são contraindicadas durante o tratamento com CogniThera e
+                            até 6 meses após a última dose. Vacinas inativas podem ser administradas, mas a resposta
+                            imunitária pode ser diminuída. Consultar o calendário vacinal apropriado antes de iniciar
+                            tratamento.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="mb-16">
+            <div class="bg-gradient-to-br from-primary to-primary-dark text-white py-12 px-[5%] text-center rounded-lg">
+                <h2 class="text-3xl mb-4">Precisa de mais informação?</h2>
+                <p class="text-lg opacity-90 mb-8">
+                    A nossa equipa de Medical Information está disponível para apoiar a sua prática clínica
+                </p>
+                <div class="flex justify-center gap-4 flex-wrap">
+                    <button class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-white text-primary hover:bg-bg" onclick="contactMedical()">
+                        <span>&#9993;</span> Falar com Medical Information
+                    </button>
+                    <button class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary" onclick="scheduleVisit()">
+                        <span>&#128467;</span> Agendar Visita
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-text text-white py-12 px-[5%] mt-16">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="bg-[#34495e] p-6 rounded-lg mb-8">
+                <h4 class="text-white mb-2 font-semibold">Referências Bibliográficas</h4>
+                <ol class="text-sm text-[#95a5a6] pl-6 list-decimal">
+                    <li class="mb-2">Oliveira A, et al. CogniThera in advanced renal cell carcinoma: THERA-001 phase III trial. N Engl J Med. 2024;390(8):712-724.</li>
+                    <li class="mb-2">Santos M, et al. Long-term survival outcomes with CogniThera: 3-year follow-up of THERA-001. Lancet Oncol. 2024;25(3):445-456.</li>
+                    <li class="mb-2">Ferreira J, et al. Safety profile of next-generation PD-1 inhibitors in RCC. J Clin Oncol. 2024;42(12):suppl. 4567.</li>
+                    <li class="mb-2">ESMO Guidelines Committee. Renal cell carcinoma: ESMO Clinical Practice Guidelines. Ann Oncol. 2024;35(2):123-135.</li>
+                </ol>
+                <p class="mt-4 text-sm text-[#7f8c8d]">
+                    Última atualização: 7 de Março de 2026 | Data de aprovação EMA: 15 Janeiro 2024
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-secondary mb-4 font-semibold">Cognipharma</h4>
+                    <ul class="list-none">
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Sobre Nós</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Áreas Terapêuticas</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Pipeline</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Investigadores</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-secondary mb-4 font-semibold">Apoio</h4>
+                    <ul class="list-none">
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Medical Information</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Farmacovigilância</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Contactos</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-secondary mb-4 font-semibold">Legal</h4>
+                    <ul class="list-none">
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Política de Privacidade</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Termos de Utilização</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Política de Cookies</a></li>
+                        <li class="mb-2"><a href="#" class="text-[#95a5a6] no-underline transition-colors duration-300 hover:text-white">Acessibilidade</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-[#34495e] pt-6 text-center text-[#95a5a6] text-sm">
+                <p>&copy; 2026 Cognipharma. Todos os direitos reservados. | A informação nesta página destina-se exclusivamente a profissionais de saúde.</p>
+                <p class="mt-2 text-[#7f8c8d]">
+                    CogniThera é um medicamento sujeito a receita médica. Consulte a Resumo das Características do Medicamento para informação completa.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('block');
+                content.classList.add('hidden');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.remove('border-primary');
+                btn.classList.remove('text-primary');
+                btn.classList.add('border-transparent');
+                btn.classList.add('text-text-light');
+            });
+
+            // Show selected tab
+            const selectedTab = document.getElementById(tabId);
+            selectedTab.classList.remove('hidden');
+            selectedTab.classList.add('block');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            event.target.classList.remove('border-transparent');
+            event.target.classList.remove('text-text-light');
+            event.target.classList.add('border-primary');
+            event.target.classList.add('text-primary');
+        }
+
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+
+            // Close all items
+            document.querySelectorAll('.accordion-item').forEach(acc => {
+                acc.classList.remove('active');
+            });
+
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // Resource filtering
+        function filterResources(type) {
+            const cards = document.querySelectorAll('.resource-card');
+            const buttons = document.querySelectorAll('.filter-bar .filter-btn');
+
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter cards
+            cards.forEach(card => {
+                if (type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.3s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // FAQ filtering
+        function filterFAQ(category) {
+            const items = document.querySelectorAll('.accordion-item');
+            const buttons = document.querySelectorAll('#faq .filter-btn');
+
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active', 'bg-primary', 'text-white', 'border-primary'));
+            buttons.forEach(btn => btn.classList.add('bg-white', 'text-text-light', 'border-border'));
+            event.target.classList.add('active', 'bg-primary', 'text-white', 'border-primary');
+            event.target.classList.remove('bg-white', 'text-text-light', 'border-border');
+
+            // Filter FAQ items
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Sticky nav active state on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.sticky-nav a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Action buttons
+        function saveForLater() {
+            alert('Conteúdo guardado na sua área pessoal!');
+        }
+
+        function shareContent() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'CogniThera - Nova Opção Terapêutica',
+                    text: 'Informação sobre CogniThera para carcinoma de células renais',
+                    url: window.location.href
+                });
+            } else {
+                alert('Link copiado para a área de transferência!');
+            }
+        }
+
+        function downloadPDF() {
+            alert('A iniciar download do resumo clínico...');
+        }
+
+        function contactMedical() {
+            alert('Redirecionando para o formulário de contacto Medical Information...');
+        }
+
+        function scheduleVisit() {
+            alert('Calendário de visitas aberto. Selecione uma data disponível.');
+        }
+
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>

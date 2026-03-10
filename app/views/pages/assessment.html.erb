@@ -1,0 +1,392 @@
+<% content_for :title, "Avaliação Terapêutica Personalizada | CogniThera" %>
+
+<% content_for :head do %>
+  <style>
+      /* Animations */
+      @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-10px); }
+          75% { transform: translateX(10px); }
+      }
+      @keyframes pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(0, 90, 135, 0.4); }
+          50% { box-shadow: 0 0 0 10px rgba(0, 90, 135, 0); }
+      }
+      .animate-fadeIn {
+          animation: fadeIn 0.4s ease;
+      }
+      .animate-shake {
+          animation: shake 0.4s ease;
+      }
+      /* Selected option card checkmark */
+      .option-card.selected::after {
+          content: '✓';
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          width: 24px;
+          height: 24px;
+          background: #005a87;
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+          font-weight: bold;
+      }
+      /* Step indicator states */
+      .step .step-number {
+          background: white;
+          border-color: #e1e8ed;
+          color: #5d6d7e;
+      }
+      .step .step-label {
+          color: #5d6d7e;
+      }
+      .step.active .step-number,
+      .step.completed .step-number {
+          background: #005a87;
+          border-color: #005a87;
+          color: white;
+      }
+      .step.active .step-label,
+      .step.completed .step-label {
+          color: #005a87;
+      }
+      /* Hide scrollbar for progress bar */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+  </style>
+<% end %>
+
+<!-- Header -->
+    <header class="bg-white shadow-card py-4 px-[5%]">
+        <nav class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold text-primary">Cogni<span class="text-secondary">Pharma</span></div>
+            <a href="/" class="text-primary no-underline flex items-center gap-2 font-medium hover:underline">
+                <span>&#8592;</span> Voltar à página principal
+            </a>
+        </nav>
+    </header>
+
+    <div class="max-w-[1000px] mx-auto py-12 px-[5%]" data-controller="assessment" data-assessment-total-steps-value="3">
+        <!-- Wizard Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-primary text-4xl mb-4 font-bold">Avaliação Terapêutica Personalizada</h1>
+            <p class="text-text-light text-lg max-w-[600px] mx-auto">Responda a algumas perguntas simples para receber recomendações personalizadas baseadas no perfil do seu doente.</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="mb-12" data-assessment-target="progressContainer">
+            <div class="flex justify-between relative max-w-[600px] mx-auto">
+                <div class="absolute top-5 left-[50px] right-[50px] h-1 bg-border z-0"></div>
+                <div class="absolute top-5 left-[50px] h-1 bg-primary z-10 transition-all duration-400 w-0" data-assessment-target="progressLine"></div>
+                
+                <div class="flex flex-col items-center relative z-20 step active" data-step="1" data-assessment-target="stepIndicator">
+                    <div class="step-number w-11 h-11 rounded-full border-[3px] flex items-center justify-center font-bold text-lg">1</div>
+                    <div class="step-label mt-3 text-sm font-medium">Perfil do Doente</div>
+                </div>
+                <div class="flex flex-col items-center relative z-20 step" data-step="2" data-assessment-target="stepIndicator">
+                    <div class="step-number w-11 h-11 rounded-full border-[3px] flex items-center justify-center font-bold text-lg">2</div>
+                    <div class="step-label mt-3 text-sm font-medium">Estado do Tratamento</div>
+                </div>
+                <div class="flex flex-col items-center relative z-20 step" data-step="3" data-assessment-target="stepIndicator">
+                    <div class="step-number w-11 h-11 rounded-full border-[3px] flex items-center justify-center font-bold text-lg">3</div>
+                    <div class="step-label mt-3 text-sm font-medium">Considerações Especiais</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Wizard -->
+        <div class="bg-white rounded-xl shadow-card-lg p-12 mb-8 min-h-[400px]" data-assessment-target="questionContainer">
+            <!-- Step 1: Patient Profile -->
+            <div class="hidden animate-fadeIn [&.active]:block active" data-step="1" data-assessment-target="questionStep">
+                <h2 class="text-2xl text-primary mb-2 font-semibold">Qual é o perfil de risco do doente?</h2>
+                <p class="text-text-light mb-8">Selecione a categoria de risco segundo critérios IMDC (International Metastatic RCC Database Consortium)</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="1" 
+                         data-value="favorable" 
+                         data-type="single"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">💪</div>
+                        <div class="font-semibold text-text mb-2">Risco Favorável</div>
+                        <div class="text-sm text-text-light">ECOG 0, tempo desde diagnóstico >1 ano, HB >LLN, CA corrigido &lt;ULN, neutrófilos &lt;ULN, plaquetas &lt;ULN (0 fatores de risco)</div>
+                    </div>
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="1" 
+                         data-value="intermediate" 
+                         data-type="single"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">⚠️</div>
+                        <div class="font-semibold text-text mb-2">Risco Intermédio</div>
+                        <div class="text-sm text-text-light">1-2 fatores de risco IMDC. Doentes com prognóstico moderado que podem beneficiar de diferentes abordagens terapêuticas.</div>
+                    </div>
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="1" 
+                         data-value="poor" 
+                         data-type="single"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">❗</div>
+                        <div class="font-semibold text-text mb-2">Risco Desfavorável</div>
+                        <div class="text-sm text-text-light">3-6 fatores de risco IMDC. Doentes com doença agressiva que necessitam de estratégias terapêuticas mais intensivas.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Treatment Line -->
+            <div class="hidden animate-fadeIn [&.active]:block" data-step="2" data-assessment-target="questionStep">
+                <h2 class="text-2xl text-primary mb-2 font-semibold">Em que fase do tratamento se encontra?</h2>
+                <p class="text-text-light mb-8">Selecione a linha de tratamento atual para apresentar recomendações adequadas</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="2" 
+                         data-value="firstline" 
+                         data-type="single"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">🏆</div>
+                        <div class="font-semibold text-text mb-2">Primeira Linha</div>
+                        <div class="text-sm text-text-light">Doente a iniciar tratamento sistémico pela primeira vez ou nunca tratado previamente para CCR metastático.</div>
+                    </div>
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="2" 
+                         data-value="secondline" 
+                         data-type="single"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">🔄</div>
+                        <div class="font-semibold text-text mb-2">Segunda Linha ou Superior</div>
+                        <div class="text-sm text-text-light">Doente com progressão após tratamento prévio (TKI, IO monoterapia, ou combinação).</div>
+                    </div>
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="2" 
+                         data-value="maintenance" 
+                         data-type="single"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">🔧</div>
+                        <div class="font-semibold text-text mb-2">Manutenção / Ajuste</div>
+                        <div class="text-sm text-text-light">Doente em tratamento atual mas com necessidade de ajuste devido a eficácia subótima ou intolerância.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Special Considerations -->
+            <div class="hidden animate-fadeIn [&.active]:block" data-step="3" data-assessment-target="questionStep">
+                <h2 class="text-2xl text-primary mb-2 font-semibold">Existem considerações especiais relevantes?</h2>
+                <p class="text-text-light mb-8">Selecione todas as opções aplicáveis ao caso clínico (múltipla seleção possível)</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="3" 
+                         data-value="autoimmune" 
+                         data-type="multiple"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">🤒</div>
+                        <div class="font-semibold text-text mb-2">Doença Autoimune</div>
+                        <div class="text-sm text-text-light">História de doença autoimune (ex: tireoidite, psoriasis, lúpus) controlada ou ativa.</div>
+                    </div>
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="3" 
+                         data-value="cns" 
+                         data-type="multiple"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">🧠</div>
+                        <div class="font-semibold text-text mb-2">Metástases CNS</div>
+                        <div class="text-sm text-text-light">Doente com metástases cerebrais ativas ou tratadas previamente (irradiação/cirurgia).</div>
+                    </div>
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="3" 
+                         data-value="hepatic" 
+                         data-type="multiple"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">🎨</div>
+                        <div class="font-semibold text-text mb-2">Função Hepática Comprometida</div>
+                        <div class="text-sm text-text-light">Child-Pugh B ou C, ou elevção de transaminases/bilirrubina não explicável por outras causas.</div>
+                    </div>
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="3" 
+                         data-value="cardiac" 
+                         data-type="multiple"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">💙</div>
+                        <div class="font-semibold text-text mb-2">Doença Cardíaca</div>
+                        <div class="text-sm text-text-light">História de insuficiência cardíaca, arritmias significativas ou cardiotoxicidade prévia.</div>
+                    </div>
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="3" 
+                         data-value="elderly" 
+                         data-type="multiple"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">👵</div>
+                        <div class="font-semibold text-text mb-2">Idade Avançada</div>
+                        <div class="text-sm text-text-light">Doente com >75 anos, fragilidade ou polimedicação significativa.</div>
+                    </div>
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
+                         data-step="3" 
+                         data-value="none" 
+                         data-type="multiple"
+                         data-action="click->assessment#selectOption"
+                         data-assessment-target="optionCard">
+                        <div class="text-4xl mb-4">✓</div>
+                        <div class="font-semibold text-text mb-2">Sem Considerações Especiais</div>
+                        <div class="text-sm text-text-light">Doente sem comorbilidades relevantes que possam influenciar a decisão terapêutica.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex justify-between gap-4 mt-8">
+                <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed" 
+                        data-assessment-target="prevButton" 
+                        data-action="click->assessment#previousStep"
+                        disabled>
+                    <span>&#8592;</span> Anterior
+                </button>
+                <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-card disabled:opacity-50 disabled:cursor-not-allowed" 
+                        data-assessment-target="nextButton" 
+                        data-action="click->assessment#nextStep"
+                        disabled>
+                    Próximo <span>&#8594;</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="hidden animate-fadeIn [&.active]:block" data-assessment-target="resultsContainer">
+            <div class="bg-gradient-to-br from-primary to-primary-dark text-white py-12 px-12 rounded-t-xl text-center">
+                <h2 class="text-3xl mb-4">Recomendações Personalizadas</h2>
+                <div class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur-md">
+                    Perfil: <span data-assessment-target="profileBadge">Risco Intermédio • 1ª Linha</span>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-b-xl shadow-card-lg overflow-hidden">
+                <!-- Primary Recommendation -->
+                <div class="py-8 px-12 border-b border-border">
+                    <h3 class="flex items-center gap-3 text-primary text-xl mb-4">
+                        <span class="text-2xl">🏆</span>
+                        Recomendação Terapêutica Principal
+                    </h3>
+                    <div class="bg-gradient-to-br from-[#e8f4f8] to-[#d1e7dd] border-l-4 border-success p-6 rounded-lg mb-6" data-assessment-target="primaryRecommendation">
+                        <!-- Content populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Alternative Options -->
+                <div class="py-8 px-12 border-b border-border">
+                    <h3 class="flex items-center gap-3 text-primary text-xl mb-4">
+                        <span class="text-2xl">🔄</span>
+                        Opções Alternativas
+                    </h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6" data-assessment-target="alternativesGrid">
+                        <!-- Content populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Special Considerations -->
+                <div class="py-8 px-12 border-b border-border">
+                    <h3 class="flex items-center gap-3 text-primary text-xl mb-4">
+                        <span class="text-2xl">⚠️</span>
+                        Considerações Especiais Identificadas
+                    </h3>
+                    <div data-assessment-target="specialConsiderations">
+                        <!-- Content populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Educational Resources -->
+                <div class="py-8 px-12 border-b border-border">
+                    <h3 class="flex items-center gap-3 text-primary text-xl mb-4">
+                        <span class="text-2xl">📚</span>
+                        Recursos Recomendados para Este Perfil
+                    </h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6" data-assessment-target="resourcesGrid">
+                        <!-- Content populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="py-8 px-12 bg-bg flex gap-4 justify-center flex-wrap">
+                    <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white" data-action="click->assessment#restart">
+                        <span>&#128260;</span> Nova Avaliação
+                    </button>
+                    <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-card" data-action="click->assessment#exportResults">
+                        <span>&#128190;</span> Exportar Recomendações
+                    </button>
+                    <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-card" data-action="click->assessment#contactSupport">
+                        <span>&#9993;</span> Consultar Medical Information
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Implementation Notes -->
+        <div class="bg-white rounded-xl shadow-card p-8 mt-12">
+            <h3 class="text-primary mb-6 flex items-center gap-2 font-semibold">💻 Documentação Técnica da Implementação</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-bg p-6 rounded-lg border-l-4 border-secondary">
+                    <h4 class="text-primary mb-3 font-semibold">Lógica Frontend</h4>
+                    <ul class="ml-5 text-text-light list-disc">
+                        <li class="mb-2">Wizard progressivo com 3 passos sequenciais</li>
+                        <li class="mb-2">Estado gerido via classe AssessmentEngine (ES6)</li>
+                        <li class="mb-2">Validação de seleção antes de avançar</li>
+                        <li class="mb-2">Animações CSS para transições suaves</li>
+                        <li>LocalStorage para persistência entre sessões</li>
+                    </ul>
+                </div>
+                <div class="bg-bg p-6 rounded-lg border-l-4 border-secondary">
+                    <h4 class="text-primary mb-3 font-semibold">Arquitetura de Dados</h4>
+                    <ul class="ml-5 text-text-light list-disc">
+                        <li class="mb-2">Decision tree mapeada em objeto JSON (contentDatabase.js)</li>
+                        <li class="mb-2">Regras condicionais baseadas em lógica AND/OR</li>
+                        <li class="mb-2">Separação de concerns: UI (Stimulus), Lógica (Engine), Dados (JSON)</li>
+                        <li class="mb-2">Content mapping por combinações de respostas</li>
+                        <li>Fallback para casos não mapeados</li>
+                    </ul>
+                </div>
+                <div class="bg-bg p-6 rounded-lg border-l-4 border-secondary">
+                    <h4 class="text-primary mb-3 font-semibold">Integração Backend/CMS</h4>
+                    <ul class="ml-5 text-text-light list-disc">
+                        <li class="mb-2">API endpoint: GET /api/recommendations</li>
+                        <li class="mb-2">POST para logging de interações (analytics)</li>
+                        <li class="mb-2">CMS pode gerir conteúdo via JSON config</li>
+                        <li class="mb-2">Caching de regras para performance</li>
+                        <li>Autenticação para tracking por profissional</li>
+                    </ul>
+                </div>
+                <div class="bg-bg p-6 rounded-lg border-l-4 border-secondary">
+                    <h4 class="text-primary mb-3 font-semibold">Alternativas Técnicas</h4>
+                    <ul class="ml-5 text-text-light list-disc">
+                        <li class="mb-2"><strong>Abordagem A:</strong> Pure client-side (atual) - rápida, sem backend</li>
+                        <li class="mb-2"><strong>Abordagem B:</strong> Server-side rendering - SEO, conteúdo dinâmico</li>
+                        <li class="mb-2"><strong>Abordagem C:</strong> Headless CMS (Contentful/Drupal) - gestão fácil</li>
+                        <li class="mb-2"><strong>Abordagem D:</strong> ML/IA para personalização avançada</li>
+                        <li><strong>Abordagem E:</strong> Chatbot conversacional (LLM)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

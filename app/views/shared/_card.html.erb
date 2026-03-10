@@ -1,0 +1,33 @@
+<%# Card Component
+  Usage:
+  <%= render 'shared/card', title: 'Card Title', icon: '🎯', border_color: :secondary do %>
+    <p>Card content goes here</p>
+  <% end %>
+  
+  Border colors: :primary, :secondary, :success, :accent
+%>
+
+<%
+  border_color = local_assigns.fetch(:border_color, :secondary)
+  
+  border_classes = {
+    primary: "border-l-primary",
+    secondary: "border-l-secondary",
+    success: "border-l-success",
+    accent: "border-l-accent"
+  }[border_color]
+%>
+
+<div class="bg-white p-6 rounded-lg shadow-card <%= border_classes %> border-l-4">
+  <% if local_assigns[:icon] %>
+    <div class="text-3xl mb-2"><%= icon %></div>
+  <% end %>
+  
+  <% if local_assigns[:title] %>
+    <h3 class="text-primary mb-2 text-lg font-semibold"><%= title %></h3>
+  <% end %>
+  
+  <div class="text-text-light text-sm">
+    <%= yield %>
+  </div>
+</div>
