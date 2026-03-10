@@ -1,0 +1,856 @@
+<% content_for :title, "Design Notes | CogniThera" %>
+
+<!-- Header -->
+<header class="bg-white shadow-card fixed w-full top-0 z-50">
+  <nav class="flex justify-between items-center py-4 px-[5%]">
+    <div class="text-2xl font-bold text-primary"><a href="/" class="no-underline">Cogni<span class="text-secondary">Pharma</span></a></div>
+    <ul class="hidden md:flex gap-8 list-none">
+      <li><a href="/" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Home</a></li>
+      <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Áreas Terapêuticas</a></li>
+      <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Recursos</a></li>
+      <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Perfil</a></li>
+    </ul>
+    <div class="flex gap-4">
+      <a href="/assessment" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white">
+        <span>&#128221;</span> Assessment
+      </a>
+      <a href="/design-notes" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-primary text-white hover:bg-primary-dark">
+        <span>&#128161;</span> Design Notes
+      </a>
+    </div>
+  </nav>
+</header>
+
+<div class="min-h-screen bg-[#F0EDE6] pt-[70px]">
+  <!-- DOCUMENT HEADER -->
+  <div class="bg-white border-b-[3px] border-[#E8A83E] py-8 px-6">
+    <div class="max-w-[1000px] mx-auto">
+      <h1 class="text-2xl font-extrabold text-[#212529] mb-1">Design Notes</h1>
+      <p class="mt-4 text-sm text-[#495057] max-w-[700px] leading-relaxed">
+        Este documento explica a arquitetura de informação da homepage do CogniThera™ para carcinoma renal. Cada secção inclui a decisão de design, raciocínio estratégico e notas de implementação CMS. A estrutura segue o jornada de decisão clínica de um oncologista avaliando opções terapêuticas.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-[1000px] mx-auto px-6 py-8">
+
+    <!-- 01. HEADER/NAVIGATION -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        01 — Header & Navegação
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <!-- Actual Header from Homepage -->
+        <div class="border-b border-[#E9ECEF] px-6 py-4 flex items-center justify-between">
+          <div class="text-2xl font-bold text-[#005a87]">Cogni<span class="text-[#00a8b5]">Pharma</span></div>
+          <div class="hidden md:flex gap-8 list-none">
+            <a href="/" class="text-text font-medium hover:text-[#005a87] transition-colors">Home</a>
+            <a href="#" class="text-text font-medium hover:text-[#005a87] transition-colors">Áreas Terapêuticas</a>
+            <a href="#" class="text-text font-medium hover:text-[#005a87] transition-colors">Recursos</a>
+            <a href="#" class="text-text font-medium hover:text-[#005a87] transition-colors">Perfil</a>
+          </div>
+          <div class="flex gap-4">
+            <a href="/assessment" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-transparent border-2 border-[#005a87] text-[#005a87]">
+              <span>📝</span> Assessment
+            </a>
+            <a href="/design-notes" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-[#005a87] text-white">
+              <span>💡</span> Design Notes
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          O header fixo mantém a navegação primária sempre acessível. Os CTAs "Assessment" e "Design Notes" substituem os botões genéricos "Guardar" e "Partilhar" — oferecendo acesso direto a ferramentas interativas valiosas (wizard de avaliação e documentação de design). Esta mudança alinha com a arquitetura de informação da página: navegação essencial no centro, ferramentas de apoio à decisão no lado direito como CTAs.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Navbar standard com slots configuráveis: logo, links de navegação central, CTAs personalizados no canto direito. Os CTAs podem ser configurados como links externos ou internos.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: Links colapsam em hamburger menu. CTAs mantêm-se visíveis ou movem-se para menu secundário.
+        </p>
+      </div>
+    </div>
+
+    <!-- 02. HERO SECTION -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        02 — Hero Section
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <!-- Actual Hero from Homepage -->
+        <div class="relative bg-gradient-to-br from-[#005a87] to-[#003d5c] text-white py-16 px-8 overflow-hidden">
+          <div class="relative z-10 max-w-[1400px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <span class="inline-block bg-[#f39c12] text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">NOVO • Aprovado EMA 2024</span>
+              <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">CogniThera</h1>
+              <p class="text-xl opacity-90 mb-8">Inibidor de checkpoint imunológico de última geração para carcinoma de células renais avançado</p>
+              <div class="flex flex-wrap gap-4">
+                <a href="#" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-white text-[#005a87]">Consultar Dados Clínicos</a>
+                <a href="#" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-white/20 text-white border-2 border-white">Avaliação Personalizada</a>
+                <a href="#" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-transparent text-white border-2 border-white">Ver Conteúdos Educativos</a>
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="bg-white/10 rounded-xl p-8 backdrop-blur-md">
+                <div class="text-7xl text-center">🏥</div>
+                <p class="text-center mt-4 opacity-90">Mecanismo de Ação Inovador</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          O hero combina aprovação regulamentar (EMA 2024) com o nome do produto e mecanismo de ação. A badge "NOVO" cria urgência de avaliação. Três CTAs distintos servem diferentes jornadas: dados clínicos (evidência), avaliação personalizada (ferramenta interativa), conteúdos educativos (aprendizagem). A imagem placeholder representa o contexto hospitalar e mecanismo de ação sem necessidade de fotografia real.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Hero Banner standard. Campos configuráveis: badge, título, subtítulo, CTAs (até 3), imagem/ilustração. Gradient de fundo personalizável.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: CTAs empilham verticalmente. Texto mantém hierarquia com título proeminente.
+        </p>
+      </div>
+    </div>
+
+    <!-- 03. STICKY NAVIGATION -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        03 — Sticky Navigation
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <!-- Actual Sticky Nav from Homepage -->
+        <div class="bg-white shadow-md sticky top-0 z-40 px-6 py-3 border-b border-[#E9ECEF]">
+          <div class="max-w-[1400px] mx-auto flex gap-8 overflow-x-auto">
+            <a href="#" class="py-2 text-[#495057] font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap">Visão Geral</a>
+            <a href="#" class="py-2 text-[#495057] font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap">Dados Clínicos</a>
+            <a href="#" class="py-2 text-[#495057] font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap">Conteúdos Educativos</a>
+            <a href="#" class="py-2 text-[#495057] font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap">Recursos</a>
+            <a href="#" class="py-2 text-[#495057] font-medium no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap">FAQ</a>
+            <a href="#" class="py-2 text-[#f39c12] font-semibold no-underline border-b-[3px] border-transparent transition-all duration-300 whitespace-nowrap">Avaliação Personalizada →</a>
+          </div>
+        </div>
+        <div class="p-4 bg-[#F8F9FA] text-xs text-[#868E96]">
+          <p>Navegação secundária fixa que aparece após scroll do hero</p>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          A sticky navigation secundária permite saltos rápidos entre secções de conteúdo denso. Profissionais de saúde não leem páginas sequencialmente — navegam por relevância. O link "Avaliação Personalizada" destacado em laranja cria ponto de conversão alternativo durante a navegação. A borda inferior ativa (border-bottom) dá feedback visual de localização.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Sticky Navigation ou Secondary Nav. Links são âncoras de smooth scroll para IDs de secção. A avaliação personalizada é link externo para /assessment.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: Scroll horizontal com fade indicator. Smooth scroll mantém funcionalidade.
+        </p>
+      </div>
+    </div>
+
+    <!-- 04. OVERVIEW SECTION -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        04 — Visão Geral (Overview)
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <div class="p-8">
+          <h3 class="text-3xl text-[#005a87] mb-6 pb-2 border-b-[3px] border-[#00a8b5] inline-block font-bold">Visão Geral</h3>
+
+          <!-- 4 Feature Cards from Homepage -->
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#00a8b5]">
+              <div class="text-3xl mb-2">🏥</div>
+              <h3 class="text-[#005a87] mb-2 font-semibold text-lg">Indicação</h3>
+              <p class="text-[#5d6d7e] text-sm">Carcinoma de células renais (CCR) avançado em adultos, como monoterapia de primeira linha</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#00a8b5]">
+              <div class="text-3xl mb-2">💪</div>
+              <h3 class="text-[#005a87] mb-2 font-semibold text-lg">Mecanismo de Ação</h3>
+              <p class="text-[#5d6d7e] text-sm">Inibidor selectivo do PD-1 que potencia a resposta imunitária antitumoral</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#00a8b5]">
+              <div class="text-3xl mb-2">💉</div>
+              <h3 class="text-[#005a87] mb-2 font-semibold text-lg">Administração</h3>
+              <p class="text-[#5d6d7e] text-sm">Infusão IV a cada 3 semanas durante 30 minutos, ambulatório</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#00a8b5]">
+              <div class="text-3xl mb-2">😷</div>
+              <h3 class="text-[#005a87] mb-2 font-semibold text-lg">Perfil de Segurança</h3>
+              <p class="text-[#5d6d7e] text-sm">Perfil favorável vs. terapia padrão. Monitorização de eventos imunomediados</p>
+            </div>
+          </div>
+
+          <!-- Therapeutic Summary from Homepage -->
+          <div class="bg-white p-8 rounded-lg shadow-md mb-8">
+            <h3 class="text-[#005a87] mb-4 font-semibold text-lg">Resumo Terapêutico</h3>
+            <p class="mb-4 text-[#2c3e50]">
+              O CogniThera representa um avanço significativo no tratamento do carcinoma de células renais avançado.
+              Como inibidor de checkpoint imunológico de nova geração, demonstra eficácia superior no ensaio
+              clínico de Fase III THERA-001, com benefício de sobrevivência global clinicamente significativo.
+            </p>
+            <p class="text-[#2c3e50]">
+              A sua selectividade aprimorada pelo receptor PD-1 minimiza os efeitos adversos imunomediados
+              frequentemente observados com terapias convencionais, permitindo uma melhor qualidade de vida
+              para os doentes durante o tratamento.
+            </p>
+
+            <div class="bg-gradient-to-br from-[#e8f4f8] to-[#d1e7dd] border-l-4 border-[#27ae60] p-6 rounded-lg mt-8">
+              <h4 class="text-[#27ae60] mb-2 font-semibold">★ Pontos-Chave para a Prática Clínica</h4>
+              <ul class="ml-6 mt-2 list-disc text-[#2c3e50]">
+                <li>Administração conveniente em regime ambulatório</li>
+                <li>Sem necessidade de pré-medicação rotineira</li>
+                <li>Intervalo de 3 semanas permite melhor conciliação com vida quotidiana do doente</li>
+                <li>Redução de 40% no risco de progressão vs. sunitinibe (HR 0.60; IC 95%: 0.48-0.75)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          Os 4 cards organizam os pilares fundamentais de avaliação clínica em formato scannable. Cada oncologista prioriza diferentes aspectos — o layout permite saltar visualmente para o card relevante. A seção "Resumo Terapêutico" fornece contexto narrativo que liga os pontos entre as características individuais. O destaque verde com pontos-chave converte informação densa em bullets acionáveis (HR 0.60 com intervalo de confiança).
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Feature Cards (4-col grid) + Rich Text Block para o resumo. Campos: ícone, título, descrição. O destaque verde pode ser um componente Info/Alert Box customizado ou Rich Text formatado.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: Cards empilham em coluna única. O resumo terapêutico mantém-se como bloco de texto completo.
+        </p>
+      </div>
+    </div>
+
+    <!-- 05. CLINICAL DATA SECTION -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        05 — Dados Clínicos
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <div class="p-8 bg-[#F8F9FA]">
+          <h3 class="text-3xl text-[#005a87] mb-6 pb-2 border-b-[3px] border-[#00a8b5] inline-block font-bold">Dados Clínicos</h3>
+
+          <!-- Tabs from Homepage -->
+          <div class="flex gap-2 mb-6 border-b-2 border-[#e1e8ed] overflow-x-auto">
+            <button class="py-3 px-6 bg-[#005a87] text-white border-none font-medium whitespace-nowrap border-b-[3px] border-[#005a87] -mb-0.5 rounded-t-lg">Eficácia</button>
+            <button class="py-3 px-6 bg-none border-none font-medium text-[#5d6d7e] whitespace-nowrap border-b-[3px] border-transparent -mb-0.5">Segurança</button>
+            <button class="py-3 px-6 bg-none border-none font-medium text-[#5d6d7e] whitespace-nowrap border-b-[3px] border-transparent -mb-0.5">Comparativos</button>
+          </div>
+
+          <!-- Efficacy Content from Homepage -->
+          <div class="bg-white p-6 rounded-lg shadow-md mb-4 border-l-4 border-[#005a87]">
+            <div class="flex justify-between items-start mb-4 flex-wrap gap-2">
+              <div>
+                <span class="text-[#005a87] font-semibold text-lg">Ensaio THERA-001</span>
+                <p class="text-[#5d6d7e] text-sm mt-1">Estudo multicêntrico, randomizado, duplo-cego, controlado por placebo</p>
+              </div>
+              <span class="bg-[#00a8b5] text-white px-3 py-1 rounded text-sm font-semibold">FASE III</span>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-[#005a87]">892</div>
+                <div class="text-sm text-[#5d6d7e]">Doentes randomizados</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-[#005a87]">24.8m</div>
+                <div class="text-sm text-[#5d6d7e]">Mediana SG</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-[#005a87]">42%</div>
+                <div class="text-sm text-[#5d6d7e]">Taxa resposta objetiva</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-[#005a87]">9.2m</div>
+                <div class="text-sm text-[#5d6d7e]">Mediana LPP</div>
+              </div>
+            </div>
+
+            <p class="text-[#5d6d7e] mt-4">
+              <strong>Conclusão:</strong> O CogniThera demonstrou superioridade estatística e clinicamente
+              significativa em sobrevivência global vs. sunitinibe (HR 0.68; IC 95%: 0.52-0.89; p&lt;0.001).
+            </p>
+          </div>
+
+          <!-- Comparison Table Preview -->
+          <div class="w-full bg-white rounded-lg overflow-hidden shadow-md mt-6 overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr>
+                  <th class="bg-[#005a87] text-white p-4 text-left font-semibold">Parâmetro</th>
+                  <th class="bg-[#005a87] text-white p-4 text-left font-semibold">CogniThera</th>
+                  <th class="bg-[#005a87] text-white p-4 text-left font-semibold">Sunitinibe</th>
+                  <th class="bg-[#005a87] text-white p-4 text-left font-semibold">Pembrolizumabe</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-[#e1e8ed] hover:bg-[#f8f9fa]">
+                  <td class="p-4">Sobrevivência Global (mediana)</td>
+                  <td class="p-4 font-semibold">24.8 meses</td>
+                  <td class="p-4">19.2 meses</td>
+                  <td class="p-4">22.1 meses</td>
+                </tr>
+                <tr class="border-b border-[#e1e8ed] hover:bg-[#f8f9fa]">
+                  <td class="p-4">Livre de Progressão (mediana)</td>
+                  <td class="p-4 font-semibold">9.2 meses</td>
+                  <td class="p-4">5.6 meses</td>
+                  <td class="p-4">8.4 meses</td>
+                </tr>
+                <tr class="border-b border-[#e1e8ed] hover:bg-[#f8f9fa]">
+                  <td class="p-4">Taxa Resposta Objetiva</td>
+                  <td class="p-4 font-semibold">42%</td>
+                  <td class="p-4">27%</td>
+                  <td class="p-4">35%</td>
+                </tr>
+                <tr class="border-b border-[#e1e8ed] hover:bg-[#f8f9fa]">
+                  <td class="p-4">Eventos Grau 3-4</td>
+                  <td class="p-4 font-semibold">15%</td>
+                  <td class="p-4">68%</td>
+                  <td class="p-4">22%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Download CTA from Homepage -->
+          <div class="mt-8 p-6 bg-white rounded-lg shadow-md flex justify-between items-center flex-wrap gap-4">
+            <div>
+              <h4 class="text-[#005a87] font-semibold mb-1">Resumo dos Dados Clínicos</h4>
+              <p class="text-[#5d6d7e] text-sm">PDF completo com todas as análises e referências</p>
+            </div>
+            <button class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-[#005a87] text-white">
+              <span>⬇</span> Descarregar PDF
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          Secção crítica para oncologistas — organizada em três dimensões via tabs: Eficácia (resultados), Segurança (tolerabilidade), Comparativos (vs. alternativas). Cada estudo apresenta estatísticas chave em formato scannable (grid de 4 métricas) antes do detalhe narrativo. A tabela comparativa permite avaliação direta contra terapias concorrentes (sunitinibe, pembrolizumabe) — essencial para decisão de prescrição. O download PDF no final serve profissionais que preferem documentos offline para arquivo ou apresentações.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Tabbed Content para navegação entre eficácia/segurança/comparativos. Os estudos podem ser componentes de Card com campos estruturados (título, tipo de estudo, métricas, conclusão). A tabela comparativa pode ser um componente Table customizado ou Rich Text formatado.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: Tabs convertem-se em dropdown ou swipeable. Tabela comparativa com scroll horizontal (preservar todas as colunas). Métricas mantêm-se em grid 2×2.
+        </p>
+      </div>
+    </div>
+
+    <!-- 06. EDUCATIONAL CONTENT -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        06 — Conteúdos Educativos
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <div class="p-8">
+          <h3 class="text-3xl text-[#005a87] mb-6 pb-2 border-b-[3px] border-[#00a8b5] inline-block font-bold">Conteúdos Educativos</h3>
+
+          <!-- Filter Tags from Homepage -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            <button class="py-2 px-4 bg-[#005a87] text-white border-2 border-[#005a87] rounded-full font-medium">Todos</button>
+            <button class="py-2 px-4 bg-white border-2 border-[#e1e8ed] rounded-full text-[#495057] font-medium">Vídeos</button>
+            <button class="py-2 px-4 bg-white border-2 border-[#e1e8ed] rounded-full text-[#495057] font-medium">Webinars</button>
+            <button class="py-2 px-4 bg-white border-2 border-[#e1e8ed] rounded-full text-[#495057] font-medium">Infografias</button>
+            <button class="py-2 px-4 bg-white border-2 border-[#e1e8ed] rounded-full text-[#495057] font-medium">Áudio</button>
+          </div>
+
+          <!-- Resource Cards from Homepage -->
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 border border-[#e1e8ed]">
+              <div class="h-40 bg-gradient-to-br from-[#005a87] to-[#00a8b5] flex items-center justify-center text-5xl text-white">▶</div>
+              <div class="p-6">
+                <span class="inline-block bg-[#f8f9fa] text-[#005a87] px-2 py-1 rounded text-xs font-semibold mb-2">VÍDEO</span>
+                <h3 class="text-lg text-[#2c3e50] font-semibold mb-2">Mecanismo de Ação do CogniThera</h3>
+                <p class="text-[#5d6d7e] text-sm">Explicação visual da interação PD-1/PD-L1 e restauração da resposta imunitária.</p>
+                <div class="flex gap-4 text-sm text-[#5d6d7e] mt-4">
+                  <span>⏱ 8 min</span>
+                  <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#27ae60]"></span>Básico</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 border border-[#e1e8ed]">
+              <div class="h-40 bg-gradient-to-br from-[#00a8b5] to-[#005a87] flex items-center justify-center text-5xl text-white">🎬</div>
+              <div class="p-6">
+                <span class="inline-block bg-[#f8f9fa] text-[#005a87] px-2 py-1 rounded text-xs font-semibold mb-2">WEBINAR</span>
+                <h3 class="text-lg text-[#2c3e50] font-semibold mb-2">Casos Clínicos em Oncologia Médica</h3>
+                <p class="text-[#5d6d7e] text-sm">Discussão de 3 casos práticos com Dr. Maria Santos e Dr. João Ferreira.</p>
+                <div class="flex gap-4 text-sm text-[#5d6d7e] mt-4">
+                  <span>⏱ 45 min</span>
+                  <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#f39c12]"></span>Intermédio</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 border border-[#e1e8ed]">
+              <div class="h-40 bg-gradient-to-br from-[#f39c12] to-[#e67e22] flex items-center justify-center text-5xl text-white">📈</div>
+              <div class="p-6">
+                <span class="inline-block bg-[#f8f9fa] text-[#005a87] px-2 py-1 rounded text-xs font-semibold mb-2">INFOGRAFIA</span>
+                <h3 class="text-lg text-[#2c3e50] font-semibold mb-2">Algoritmo de Tratamento CCR</h3>
+                <p class="text-[#5d6d7e] text-sm">Fluxograma de decisão terapêutica e posicionamento do CogniThera.</p>
+                <div class="flex gap-4 text-sm text-[#5d6d7e] mt-4">
+                  <span>⬇ PDF</span>
+                  <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#27ae60]"></span>Básico</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 border border-[#e1e8ed]">
+              <div class="h-40 bg-gradient-to-br from-[#9b59b6] to-[#8e44ad] flex items-center justify-center text-5xl text-white">🎤</div>
+              <div class="p-6">
+                <span class="inline-block bg-[#f8f9fa] text-[#005a87] px-2 py-1 rounded text-xs font-semibold mb-2">PODCAST</span>
+                <h3 class="text-lg text-[#2c3e50] font-semibold mb-2">Oncologia em Discussão - Ep. 23</h3>
+                <p class="text-[#5d6d7e] text-sm">Imunoterapia no CCR: evidências recentes e perspectivas futuras.</p>
+                <div class="flex gap-4 text-sm text-[#5d6d7e] mt-4">
+                  <span>⏱ 32 min</span>
+                  <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#e74c3c]"></span>Avançado</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 border border-[#e1e8ed]">
+              <div class="h-40 bg-gradient-to-br from-[#005a87] to-[#00a8b5] flex items-center justify-center text-5xl text-white">▶</div>
+              <div class="p-6">
+                <span class="inline-block bg-[#f8f9fa] text-[#005a87] px-2 py-1 rounded text-xs font-semibold mb-2">VÍDEO</span>
+                <h3 class="text-lg text-[#2c3e50] font-semibold mb-2">Gestão de Eventos Imunomediados</h3>
+                <p class="text-[#5d6d7e] text-sm">Protocolos práticos de identificação e tratamento de efeitos adversos.</p>
+                <div class="flex gap-4 text-sm text-[#5d6d7e] mt-4">
+                  <span>⏱ 12 min</span>
+                  <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#f39c12]"></span>Intermédio</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-1 border border-[#e1e8ed]">
+              <div class="h-40 bg-gradient-to-br from-[#00a8b5] to-[#005a87] flex items-center justify-center text-5xl text-white">🎬</div>
+              <div class="p-6">
+                <span class="inline-block bg-[#f8f9fa] text-[#005a87] px-2 py-1 rounded text-xs font-semibold mb-2">WEBINAR</span>
+                <h3 class="text-lg text-[#2c3e50] font-semibold mb-2">Resultados THERA-001: Análise Detalhada</h3>
+                <p class="text-[#5d6d7e] text-sm">Apresentação aprofundada do estudo pivotal com Dr. Ana Oliveira.</p>
+                <div class="flex gap-4 text-sm text-[#5d6d7e] mt-4">
+                  <span>⏱ 60 min</span>
+                  <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#e74c3c]"></span>Avançado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          Grid de 6 cards em 3 colunas (desktop) oferecendo múltiplos formatos de conteúdo. Cada card inclui: thumbnail visual (gradiente com ícone), tipo de conteúdo (badge), título, descrição, duração (tempo ou tamanho PDF), e nível de complexidade (dot color-coded: verde=básico, amarelo=intermédio, vermelho=avançado). A filtragem por tipo permite ignorar formatos irrelevantes. O hover com translateY cria feedback tátil de interatividade.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Content Cards com filtros. Campos: imagem/thumbnail, tipo (vídeo/webinar/infografia/audio), título, descrição, duração, nível (básico/intermédio/avançado), link. Filtros implementados via JavaScript client-side ou taxonomia do CMS.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: Grid 3 colunas converte para 1 coluna scrollável verticalmente. Filtros tornam-se chips scrolláveis horizontalmente.
+        </p>
+      </div>
+    </div>
+
+    <!-- 07. ADDITIONAL RESOURCES -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        07 — Recursos Adicionais
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <div class="p-8 bg-[#F8F9FA]">
+          <h3 class="text-3xl text-[#005a87] mb-6 pb-2 border-b-[3px] border-[#00a8b5] inline-block font-bold">Recursos Adicionais</h3>
+
+          <!-- 4-Column Grid from Homepage -->
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md border border-[#e1e8ed]">
+              <h3 class="text-[#005a87] mb-4 flex items-center gap-2 font-semibold">📚 Artigos Científicos</h3>
+              <ul class="list-none">
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>THERA-001: Primary Analysis</span>
+                    <span class="bg-[#f39c12] text-white px-2 py-0.5 rounded text-xs">NOVO</span>
+                  </a>
+                </li>
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Review: IO in RCC 2024</span>
+                  </a>
+                </li>
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Meta-análise Checkpoint Inhibitors</span>
+                  </a>
+                </li>
+                <li class="py-3">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Real-world Evidence Study</span>
+                    <span class="bg-[#f39c12] text-white px-2 py-0.5 rounded text-xs">DESTAQUE</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md border border-[#e1e8ed]">
+              <h3 class="text-[#005a87] mb-4 flex items-center gap-2 font-semibold">📝 Casos Clínicos</h3>
+              <ul class="list-none">
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Caso 1: CCR de risco intermédio</span>
+                  </a>
+                </li>
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Caso 2: Gestão de tireoidite</span>
+                    <span class="bg-[#f39c12] text-white px-2 py-0.5 rounded text-xs">DESTAQUE</span>
+                  </a>
+                </li>
+                <li class="py-3">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Caso 3: Resposta tardia</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md border border-[#e1e8ed]">
+              <h3 class="text-[#005a87] mb-4 flex items-center gap-2 font-semibold">📋 Guidelines</h3>
+              <ul class="list-none">
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>ESMO Guidelines RCC 2024</span>
+                  </a>
+                </li>
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>NCCN Kidney Cancer v2.2024</span>
+                  </a>
+                </li>
+                <li class="py-3">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Algorithm Treatment Flow</span>
+                    <span class="bg-[#f39c12] text-white px-2 py-0.5 rounded text-xs">PDF</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md border border-[#e1e8ed]">
+              <h3 class="text-[#005a87] mb-4 flex items-center gap-2 font-semibold">📄 Fichas Técnicas</h3>
+              <ul class="list-none">
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>RCP CogniThera (PT)</span>
+                  </a>
+                </li>
+                <li class="py-3 border-b border-[#e1e8ed]">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Ficha Técnica</span>
+                  </a>
+                </li>
+                <li class="py-3">
+                  <a href="#" class="text-[#2c3e50] no-underline flex justify-between items-center text-sm">
+                    <span>Carta de Compensação</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          Quatro colunas de recursos documentais (artigos, casos, guidelines, fichas técnicas). Cada coluna é uma listagem vertical compacta, otimizada para scan rápido. Badges "NOVO" e "DESTAQUE" priorizam conteúdo atualizado ou particularmente relevante. Esta secção serve como arquivo organizado — diferente dos conteúdos educativos (seção 06), que focam em formatos multimédia de aprendizagem.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Multi-Column List (4 colunas). Cada coluna é uma lista de links com título e badge opcional. Os itens podem ser páginas do CMS ou links externos para publicações/journals.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: 4 colunas empilham em 2×2 ou 1 coluna. Listas mantêm estrutura compacta com touch targets adequados (mínimo 44px).
+        </p>
+      </div>
+    </div>
+
+    <!-- 08. FAQ SECTION -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        08 — Perguntas Frequentes (FAQ)
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <div class="p-8">
+          <h3 class="text-3xl text-[#005a87] mb-6 pb-2 border-b-[3px] border-[#00a8b5] inline-block font-semibold">Perguntas Frequentes</h3>
+
+          <!-- FAQ Filters from Homepage -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            <button class="py-2 px-4 bg-[#005a87] text-white border-2 border-[#005a87] rounded-full font-medium">Todas</button>
+            <button class="py-2 px-4 bg-white border-2 border-[#e1e8ed] rounded-full text-[#495057] font-medium">Eficácia</button>
+            <button class="py-2 px-4 bg-white border-2 border-[#e1e8ed] rounded-full text-[#495057] font-medium">Segurança</button>
+            <button class="py-2 px-4 bg-white border-2 border-[#e1e8ed] rounded-full text-[#495057] font-medium">Administração</button>
+            <button class="py-2 px-4 bg-white border-2 border-[#e1e8ed] rounded-full text-[#495057] font-medium">Contraindicações</button>
+          </div>
+
+          <!-- Accordion from Homepage -->
+          <div class="bg-white rounded-lg overflow-hidden shadow-md border border-[#e1e8ed]">
+            <div class="border-b border-[#e1e8ed]">
+              <div class="py-5 px-6 cursor-pointer flex justify-between items-center bg-[#f8f9fa]">
+                <h4 class="font-semibold text-[#2c3e50]">Quais são os principais critérios de elegibilidade para tratamento com CogniThera?</h4>
+                <span class="text-[#005a87] text-2xl">▾</span>
+              </div>
+              <div class="px-6 py-5 text-[#5d6d7e] border-t border-[#e1e8ed]">
+                O CogniThera está indicado para adultos com carcinoma de células renais avançado de risco
+                intermédio ou favorável (segundo critérios IMDC). Os doentes devem ter ECOG 0-1 e função
+                orgânica adequada. Contraindicado em doentes com doença autoimune ativa não controlada
+                ou terapia imunossupressora sistémica.
+              </div>
+            </div>
+
+            <div class="border-b border-[#e1e8ed]">
+              <div class="py-5 px-6 cursor-pointer flex justify-between items-center">
+                <h4 class="font-semibold text-[#2c3e50]">Como gerir eventos imunomediados de Grau 2?</h4>
+                <span class="text-[#005a87] text-2xl">▾</span>
+              </div>
+            </div>
+
+            <div class="border-b border-[#e1e8ed]">
+              <div class="py-5 px-6 cursor-pointer flex justify-between items-center">
+                <h4 class="font-semibold text-[#2c3e50]">Qual o intervalo recomendado entre infusões?</h4>
+                <span class="text-[#005a87] text-2xl">▾</span>
+              </div>
+            </div>
+
+            <div class="border-b border-[#e1e8ed]">
+              <div class="py-5 px-6 cursor-pointer flex justify-between items-center">
+                <h4 class="font-semibold text-[#2c3e50]">Pode ser usado em doentes com função hepática comprometida?</h4>
+                <span class="text-[#005a87] text-2xl">▾</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="py-5 px-6 cursor-pointer flex justify-between items-center">
+                <h4 class="font-semibold text-[#2c3e50]">Qual a interação com vacinas?</h4>
+                <span class="text-[#005a87] text-2xl">▾</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          FAQ categorizado por tema (eficácia, segurança, administração, contraindicações) permite ao médico navegar diretamente para questões relevantes. O formato accordion mantém a página compacta — apenas uma pergunta expandida de cada vez. As respostas são detalhadas clinicamente (ex: "ECOG 0-1", "critérios IMDC", "função orgânica adequada") — linguagem precisa que os oncologistas esperam. Serve como primeira linha de suporte antes de contactar Medical Information.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Accordion ou Collapsible List. Campos por item: pergunta, resposta, categoria. Filtros implementados via JavaScript escondendo/mostrando itens por atributo data-category.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: Accordion funciona naturalmente com tap para expandir. Filtros podem ser dropdown ou chips horizontais.
+        </p>
+      </div>
+    </div>
+
+    <!-- 09. CTA SECTION -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        09 — Call-to-Action Final
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <!-- Actual CTA from Homepage -->
+        <div class="bg-gradient-to-br from-[#005a87] to-[#003d5c] text-white py-12 px-8 text-center">
+          <h2 class="text-3xl mb-4">Precisa de mais informação?</h2>
+          <p class="text-lg opacity-90 mb-8">
+            A nossa equipa de Medical Information está disponível para apoiar a sua prática clínica
+          </p>
+          <div class="flex justify-center gap-4 flex-wrap">
+            <button class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-white text-[#005a87]">
+              <span>✉</span> Falar com Medical Information
+            </button>
+            <button class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-8 py-4 text-lg bg-transparent text-white border-2 border-white">
+              <span>🗓</span> Agendar Visita
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          CTA final posicionado após consumo completo do conteúdo. Captura utilizadores que têm questões específicas não cobertas pelo site. Duas ações distintas: contacto médico (questões complexas, imediato) vs agendamento de visita (relação com representante). O gradiente escuro cria contraste visual que destaca esta secção como ponto de decisão.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente CTA Banner ou Promo Section. Campos: título, subtítulo, botão primário (texto, link, ícone), botão secundário (texto, link, ícone), gradiente de fundo.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: Botões empilham verticalmente em largura total para facilitar toque.
+        </p>
+      </div>
+    </div>
+
+    <!-- 10. FOOTER -->
+    <div class="mb-8">
+      <div class="inline-flex items-center gap-2 bg-[#FEF3C7] text-[#92400E] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded mb-2">
+        10 — Rodapé de Conformidade
+      </div>
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF]">
+        <!-- Actual Footer from Homepage -->
+        <div class="bg-[#2c3e50] text-white py-12 px-8">
+          <!-- Bibliographic References -->
+          <div class="bg-[#34495e] p-6 rounded-lg mb-8">
+            <h4 class="text-white mb-2 font-semibold">Referências Bibliográficas</h4>
+            <ol class="text-sm text-[#95a5a6] pl-6 list-decimal">
+              <li class="mb-2">Oliveira A, et al. CogniThera in advanced renal cell carcinoma: THERA-001 phase III trial. N Engl J Med. 2024;390(8):712-724.</li>
+              <li class="mb-2">Santos M, et al. Long-term survival outcomes with CogniThera: 3-year follow-up of THERA-001. Lancet Oncol. 2024;25(3):445-456.</li>
+              <li class="mb-2">Ferreira J, et al. Safety profile of next-generation PD-1 inhibitors in RCC. J Clin Oncol. 2024;42(12):suppl. 4567.</li>
+              <li class="mb-2">ESMO Guidelines Committee. Renal cell carcinoma: ESMO Clinical Practice Guidelines. Ann Oncol. 2024;35(2):123-135.</li>
+            </ol>
+            <p class="mt-4 text-sm text-[#7f8c8d]">
+              Última atualização: 7 de Março de 2026 | Data de aprovação EMA: 15 Janeiro 2024
+            </p>
+          </div>
+
+          <!-- Footer Grid -->
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h4 class="text-[#00a8b5] mb-4 font-semibold">Cognipharma</h4>
+              <ul class="list-none text-sm text-[#95a5a6]">
+                <li class="mb-2">Sobre Nós</li>
+                <li class="mb-2">Áreas Terapêuticas</li>
+                <li class="mb-2">Pipeline</li>
+                <li class="mb-2">Investigadores</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-[#00a8b5] mb-4 font-semibold">Apoio</h4>
+              <ul class="list-none text-sm text-[#95a5a6]">
+                <li class="mb-2">Medical Information</li>
+                <li class="mb-2">Farmacovigilância</li>
+                <li class="mb-2">Contactos</li>
+                <li class="mb-2">FAQ</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-[#00a8b5] mb-4 font-semibold">Legal</h4>
+              <ul class="list-none text-sm text-[#95a5a6]">
+                <li class="mb-2">Política de Privacidade</li>
+                <li class="mb-2">Termos de Utilização</li>
+                <li class="mb-2">Política de Cookies</li>
+                <li class="mb-2">Acessibilidade</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Legal Disclaimer -->
+          <div class="border-t border-[#34495e] pt-6 text-center text-[#95a5a6] text-sm">
+            <p>&copy; 2026 Cognipharma. Todos os direitos reservados. | A informação nesta página destina-se exclusivamente a profissionais de saúde.</p>
+            <p class="mt-2 text-[#7f8c8d]">
+              CogniThera é um medicamento sujeito a receita médica. Consulte a Resumo das Características do Medicamento para informação completa.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Annotation -->
+      <div class="bg-[#FEFCF3] border border-[#F0DCA0] border-l-4 border-l-[#E8A83E] rounded-r-lg p-5 mt-2.5">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#5C4516] mb-1.5 flex items-center gap-1.5">
+          <span>💡</span> Decisão de Design
+        </h4>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed">
+          O footer contém elementos regulamentares obrigatórios: referências bibliográficas completas (formato académico: autor, título, revista, ano), data de atualização do material, aprovação EMA, aviso de prescrição médica, e menção explícita a Farmacovigilância (requisito legal). A grid de links organiza navegação secundária (sobrenós, apoio, legal). O fundo escuro contrasta com conteúdo principal e sinaliza fim da página.
+        </p>
+        <p class="text-sm text-[#7A5C1F] leading-relaxed mt-2">
+          <strong>CMS:</strong> Componente Footer standard com múltiplas zonas: referências bibliográficas (rich text ordenado), grid de links (4 colunas), texto legal (rich text). Campos dinâmicos: data de atualização (auto ou manual), job code.
+        </p>
+        <p class="text-xs text-[#6B7280] mt-1.5 pl-3.5 border-l-2 border-[#DEE2E6] italic">
+          Mobile: Grid 4 colunas empilha em 2 colunas. Referências bibliográficas mantêm formato com scroll se necessário.
+        </p>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE SUMMARY -->
+    <div class="mb-8">
+      <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-[#E9ECEF] p-8">
+        <h3 class="text-xl font-extrabold text-[#212529] mb-6">Resumo da Arquitetura de Informação</h3>
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full bg-[#EDF2FF] flex items-center justify-center text-[#3B5BDB] font-bold text-sm flex-shrink-0">1</div>
+            <div>
+              <h4 class="text-sm font-bold text-[#212529] mb-1">Hierarquia de Navegação Dupla</h4>
+              <p class="text-sm text-[#495057]">Header global com ações (guardar/partilhar) + Sticky navigation secundária para secções de conteúdo. Serve diferentes modos de navegação.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full bg-[#EBFBEE] flex items-center justify-center text-[#2B8A3E] font-bold text-sm flex-shrink-0">2</div>
+            <div>
+              <h4 class="text-sm font-bold text-[#212529] mb-1">Progressive Disclosure</h4>
+              <p class="text-sm text-[#495057]">De visão geral (cards) para detalhe (tabs/accordion) para documentação (listas). O utilizador controla profundidade de informação.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full bg-[#FFF4E6] flex items-center justify-center text-[#E8590C] font-bold text-sm flex-shrink-0">3</div>
+            <div>
+              <h4 class="text-sm font-bold text-[#212529] mb-1">Múltiplos Formatos de Conteúdo</h4>
+              <p class="text-sm text-[#495057]">Vídeos, webinars, infografias, podcasts, PDFs, artigos científicos. Diferentes profissionais consomem informação de formas diferentes.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full bg-[#F3F0FF] flex items-center justify-center text-[#7048E8] font-bold text-sm flex-shrink-0">4</div>
+            <div>
+              <h4 class="text-sm font-bold text-[#212529] mb-1">Evidência Científica em Primeiro</h4>
+              <p class="text-sm text-[#495057]">Dados clínicos (THERA-001), estatísticas (HR 0.68), tabelas comparativas. Liderar com rigor científico, não claims promocionais.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full bg-[#FEE2E2] flex items-center justify-center text-[#DC2626] font-bold text-sm flex-shrink-0">5</div>
+            <div>
+              <h4 class="text-sm font-bold text-[#212529] mb-1">Conformidade Integrada</h4>
+              <p class="text-sm text-[#495057]">Referências bibliográficas, Farmacovigilância, aviso de prescrição médica, destinatário exclusivo — parte estrutural, não apêndice.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-6 border-t border-[#E9ECEF] text-center">
+      <p class="text-xs text-[#868E96]">
+        Documento atualizado em <%= Time.current.strftime("%d/%m/%Y") %>
+      </p>
+    </div>
+  </div>
+</div>

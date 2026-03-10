@@ -70,16 +70,27 @@
 <% end %>
 
 <!-- Header -->
-    <header class="bg-white shadow-card py-4 px-[5%]">
-        <nav class="max-w-[1400px] mx-auto flex justify-between items-center">
-            <div class="text-2xl font-bold text-primary">Cogni<span class="text-secondary">Pharma</span></div>
-            <a href="/" class="text-primary no-underline flex items-center gap-2 font-medium hover:underline">
-                <span>&#8592;</span> Voltar à página principal
-            </a>
+    <header class="bg-white shadow-card fixed w-full top-0 z-50">
+        <nav class="flex justify-between items-center py-4 px-[5%]">
+            <div class="text-2xl font-bold text-primary"><a href="/" class="no-underline">Cogni<span class="text-secondary">Pharma</span></a></div>
+            <ul class="hidden md:flex gap-8 list-none">
+                <li><a href="/" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Home</a></li>
+                <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Áreas Terapêuticas</a></li>
+                <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Recursos</a></li>
+                <li><a href="#" class="no-underline text-text font-medium transition-colors duration-300 hover:text-primary">Perfil</a></li>
+            </ul>
+            <div class="flex gap-4">
+                <a href="/assessment" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white">
+                    <span>&#128221;</span> Assessment
+                </a>
+                <a href="/design-notes" class="inline-flex items-center gap-2 font-medium transition-all duration-300 rounded cursor-pointer px-5 py-2 bg-primary text-white hover:bg-primary-dark">
+                    <span>&#128161;</span> Design Notes
+                </a>
+            </div>
         </nav>
     </header>
 
-    <div class="max-w-[1000px] mx-auto py-12 px-[5%]" data-controller="assessment" data-assessment-total-steps-value="3">
+    <div class="max-w-[1000px] mx-auto py-12 px-[5%] mt-[70px]" data-controller="assessment" data-assessment-total-steps-value="3">
         <!-- Wizard Header -->
         <div class="text-center mb-12">
             <h1 class="text-primary text-4xl mb-4 font-bold">Avaliação Terapêutica Personalizada</h1>
@@ -91,7 +102,7 @@
             <div class="flex justify-between relative max-w-[600px] mx-auto">
                 <div class="absolute top-5 left-[50px] right-[50px] h-1 bg-border z-0"></div>
                 <div class="absolute top-5 left-[50px] h-1 bg-primary z-10 transition-all duration-400 w-0" data-assessment-target="progressLine"></div>
-                
+
                 <div class="flex flex-col items-center relative z-20 step active" data-step="1" data-assessment-target="stepIndicator">
                     <div class="step-number w-11 h-11 rounded-full border-[3px] flex items-center justify-center font-bold text-lg">1</div>
                     <div class="step-label mt-3 text-sm font-medium">Perfil do Doente</div>
@@ -113,11 +124,11 @@
             <div class="hidden animate-fadeIn [&.active]:block active" data-step="1" data-assessment-target="questionStep">
                 <h2 class="text-2xl text-primary mb-2 font-semibold">Qual é o perfil de risco do doente?</h2>
                 <p class="text-text-light mb-8">Selecione a categoria de risco segundo critérios IMDC (International Metastatic RCC Database Consortium)</p>
-                
+
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="1" 
-                         data-value="favorable" 
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="1"
+                         data-value="favorable"
                          data-type="single"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -125,9 +136,9 @@
                         <div class="font-semibold text-text mb-2">Risco Favorável</div>
                         <div class="text-sm text-text-light">ECOG 0, tempo desde diagnóstico >1 ano, HB >LLN, CA corrigido &lt;ULN, neutrófilos &lt;ULN, plaquetas &lt;ULN (0 fatores de risco)</div>
                     </div>
-                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="1" 
-                         data-value="intermediate" 
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="1"
+                         data-value="intermediate"
                          data-type="single"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -135,9 +146,9 @@
                         <div class="font-semibold text-text mb-2">Risco Intermédio</div>
                         <div class="text-sm text-text-light">1-2 fatores de risco IMDC. Doentes com prognóstico moderado que podem beneficiar de diferentes abordagens terapêuticas.</div>
                     </div>
-                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="1" 
-                         data-value="poor" 
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="1"
+                         data-value="poor"
                          data-type="single"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -152,11 +163,11 @@
             <div class="hidden animate-fadeIn [&.active]:block" data-step="2" data-assessment-target="questionStep">
                 <h2 class="text-2xl text-primary mb-2 font-semibold">Em que fase do tratamento se encontra?</h2>
                 <p class="text-text-light mb-8">Selecione a linha de tratamento atual para apresentar recomendações adequadas</p>
-                
+
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="2" 
-                         data-value="firstline" 
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="2"
+                         data-value="firstline"
                          data-type="single"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -164,9 +175,9 @@
                         <div class="font-semibold text-text mb-2">Primeira Linha</div>
                         <div class="text-sm text-text-light">Doente a iniciar tratamento sistémico pela primeira vez ou nunca tratado previamente para CCR metastático.</div>
                     </div>
-                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="2" 
-                         data-value="secondline" 
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="2"
+                         data-value="secondline"
                          data-type="single"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -174,9 +185,9 @@
                         <div class="font-semibold text-text mb-2">Segunda Linha ou Superior</div>
                         <div class="text-sm text-text-light">Doente com progressão após tratamento prévio (TKI, IO monoterapia, ou combinação).</div>
                     </div>
-                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="2" 
-                         data-value="maintenance" 
+                    <div class="option-card bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="2"
+                         data-value="maintenance"
                          data-type="single"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -191,11 +202,11 @@
             <div class="hidden animate-fadeIn [&.active]:block" data-step="3" data-assessment-target="questionStep">
                 <h2 class="text-2xl text-primary mb-2 font-semibold">Existem considerações especiais relevantes?</h2>
                 <p class="text-text-light mb-8">Selecione todas as opções aplicáveis ao caso clínico (múltipla seleção possível)</p>
-                
+
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="3" 
-                         data-value="autoimmune" 
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="3"
+                         data-value="autoimmune"
                          data-type="multiple"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -203,9 +214,9 @@
                         <div class="font-semibold text-text mb-2">Doença Autoimune</div>
                         <div class="text-sm text-text-light">História de doença autoimune (ex: tireoidite, psoriasis, lúpus) controlada ou ativa.</div>
                     </div>
-                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="3" 
-                         data-value="cns" 
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="3"
+                         data-value="cns"
                          data-type="multiple"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -213,9 +224,9 @@
                         <div class="font-semibold text-text mb-2">Metástases CNS</div>
                         <div class="text-sm text-text-light">Doente com metástases cerebrais ativas ou tratadas previamente (irradiação/cirurgia).</div>
                     </div>
-                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="3" 
-                         data-value="hepatic" 
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="3"
+                         data-value="hepatic"
                          data-type="multiple"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -223,9 +234,9 @@
                         <div class="font-semibold text-text mb-2">Função Hepática Comprometida</div>
                         <div class="text-sm text-text-light">Child-Pugh B ou C, ou elevção de transaminases/bilirrubina não explicável por outras causas.</div>
                     </div>
-                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="3" 
-                         data-value="cardiac" 
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="3"
+                         data-value="cardiac"
                          data-type="multiple"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -233,9 +244,9 @@
                         <div class="font-semibold text-text mb-2">Doença Cardíaca</div>
                         <div class="text-sm text-text-light">História de insuficiência cardíaca, arritmias significativas ou cardiotoxicidade prévia.</div>
                     </div>
-                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="3" 
-                         data-value="elderly" 
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="3"
+                         data-value="elderly"
                          data-type="multiple"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -243,9 +254,9 @@
                         <div class="font-semibold text-text mb-2">Idade Avançada</div>
                         <div class="text-sm text-text-light">Doente com >75 anos, fragilidade ou polimedicação significativa.</div>
                     </div>
-                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]" 
-                         data-step="3" 
-                         data-value="none" 
+                    <div class="option-card multi-select bg-bg border-2 border-border rounded-lg p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:-translate-y-0.5 hover:shadow-card relative select-none [&.selected]:border-primary [&.selected]:bg-gradient-to-br [&.selected]:from-[#e8f4f8] [&.selected]:to-[#f0f9ff]"
+                         data-step="3"
+                         data-value="none"
                          data-type="multiple"
                          data-action="click->assessment#selectOption"
                          data-assessment-target="optionCard">
@@ -258,14 +269,14 @@
 
             <!-- Navigation -->
             <div class="flex justify-between gap-4 mt-8">
-                <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed" 
-                        data-assessment-target="prevButton" 
+                <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                        data-assessment-target="prevButton"
                         data-action="click->assessment#previousStep"
                         disabled>
                     <span>&#8592;</span> Anterior
                 </button>
-                <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-card disabled:opacity-50 disabled:cursor-not-allowed" 
-                        data-assessment-target="nextButton" 
+                <button class="inline-flex items-center gap-2 font-semibold text-base transition-all duration-300 rounded-lg cursor-pointer px-8 py-4 bg-primary text-white hover:bg-primary-dark hover:-translate-y-0.5 hover:shadow-card disabled:opacity-50 disabled:cursor-not-allowed"
+                        data-assessment-target="nextButton"
                         data-action="click->assessment#nextStep"
                         disabled>
                     Próximo <span>&#8594;</span>
@@ -281,7 +292,7 @@
                     Perfil: <span data-assessment-target="profileBadge">Risco Intermédio • 1ª Linha</span>
                 </div>
             </div>
-            
+
             <div class="bg-white rounded-b-xl shadow-card-lg overflow-hidden">
                 <!-- Primary Recommendation -->
                 <div class="py-8 px-12 border-b border-border">

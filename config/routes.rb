@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
   # Assessment wizard for personalized recommendations
   get "assessment", to: "pages#assessment"
+
+  # Design notes explaining homepage section rationale
+  get "design-notes", to: "pages#design_notes"
 end

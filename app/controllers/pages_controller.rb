@@ -4,4 +4,7 @@ class PagesController < ApplicationController
 
   def assessment
   end
+
+  def design_notes
+  end
 end
